@@ -188,7 +188,7 @@
             display: flex; align-items: center; justify-content: center; gap: 7px;
             width: 100%; padding: 13px 16px;
             background: transparent; color: var(--c-ink);
-            border: none; border-radius: 25px;
+            border: 1.5px solid var(--c-ink); border-radius: 4px;
             font-family: 'Work Sans', var(--font-body), sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
             cursor: pointer; transition: background 0.25s, color 0.25s;
             margin-bottom: 10px; box-sizing: border-box;
@@ -1098,6 +1098,8 @@
         const buyBtn = document.querySelector('.js-addtocart, .btn-add-to-cart, [data-component="product.add-to-cart"]');
         if (buyBtn) {
             buyBtn.parentNode.insertBefore(inlineBtn, buyBtn);
+            // Casa o formato dos cantos com o botão de comprar nativo (mesma borda, quadrada)
+            try { var _brad = getComputedStyle(buyBtn).borderRadius; if (_brad) inlineBtn.style.borderRadius = _brad; } catch (e) {}
         } else {
             const variantsContainer = document.querySelector('.js-product-variants');
             if (variantsContainer) {
