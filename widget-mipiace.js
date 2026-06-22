@@ -864,7 +864,7 @@
         // Tracking: registra o clique em "Comprar Agora" (marca carrinho_adicionado na prova)
         try {
             var _tp = (document.getElementById('q-phone') || {}).value || '';
-            var _td = (document.querySelector('h1.product__title,.product-single__title,h1') || {}).innerText || document.title || '';
+            var _td = (document.querySelector('.js-product-name,[data-store^="product-name"],h1.product__title,.product-single__title,h1') || {}).innerText || document.title || '';
             fetch('https://n8n.segredosdodrop.com/webhook/pl-provador-buy-click', { method: 'POST', keepalive: true, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ phone: _tp, origin: location.origin, produto: _td }) }).catch(function () {});
         } catch (e) {}
         var src = getProductForm();
@@ -954,7 +954,7 @@
         if (!btn) return;
         // Nome + valor do produto acima do botão
         var price = getMainPrice();
-        var prodName = (document.querySelector('h1.product__title,.product-single__title,h1') || {}).innerText || document.title || '';
+        var prodName = (document.querySelector('.js-product-name,[data-store^="product-name"],h1.product__title,.product-single__title,h1') || {}).innerText || document.title || '';
         var info = document.getElementById('q-result-prodinfo');
         var nameEl = document.getElementById('q-result-prodname');
         var priceEl = document.getElementById('q-result-prodprice');
@@ -979,7 +979,7 @@
 
     function init() {
         // --- FILTRO DE CATEGORIA (HAT) ---
-        const productNameNormalized = (document.querySelector('h1.product__title,.product-single__title,h1')?.innerText || document.title).toUpperCase();
+        const productNameNormalized = (document.querySelector('.js-product-name,[data-store^="product-name"],h1.product__title,.product-single__title,h1')?.innerText || document.title).toUpperCase();
         if (productNameNormalized.includes('HAT')) {
             return;
         }
@@ -998,7 +998,7 @@
         // Usa a MESMA FONTE da loja no provador (em vez de Bebas Neue / DM Sans)
         try {
             var _bodyF = getComputedStyle(document.body).fontFamily;
-            var _h = document.querySelector('h1.product__title,.product-single__title,h1,h2');
+            var _h = document.querySelector('.js-product-name,[data-store^="product-name"],h1.product__title,.product-single__title,h1,h2');
             var _headF = _h ? getComputedStyle(_h).fontFamily : _bodyF;
             var _root = document.documentElement;
             if (_bodyF) _root.style.setProperty('--font-body', _bodyF);
@@ -1088,7 +1088,7 @@
         inlineBtn.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            const prodName = document.querySelector('h1.product__title,.product-single__title,h1')?.innerText || document.title;
+            const prodName = document.querySelector('.js-product-name,[data-store^="product-name"],h1.product__title,.product-single__title,h1')?.innerText || document.title;
             applyProduct(detectProduct(prodName));
             populateImageSelector();
             openModal();
@@ -1224,7 +1224,7 @@
                 e.preventDefault();
                 e.stopPropagation();
             }
-            const prodName = document.querySelector('h1.product__title,.product-single__title,h1')?.innerText || document.title;
+            const prodName = document.querySelector('.js-product-name,[data-store^="product-name"],h1.product__title,.product-single__title,h1')?.innerText || document.title;
             applyProduct(detectProduct(prodName));
             populateImageSelector();
             openModal();
@@ -1561,7 +1561,7 @@
                 }
 
                 const prodImg = selectedProductImgUrl || (document.querySelector('meta[property="og:image"]')?.content || '');
-                const prodName = document.querySelector('h1.product__title,.product-single__title,h1')?.innerText || document.title;
+                const prodName = document.querySelector('.js-product-name,[data-store^="product-name"],h1.product__title,.product-single__title,h1')?.innerText || document.title;
 
                 uploadStep.style.display = 'none';
                 document.getElementById('q-loading-box').style.display = 'flex';
