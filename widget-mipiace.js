@@ -1563,6 +1563,15 @@
                 const prodImg = selectedProductImgUrl || (document.querySelector('meta[property="og:image"]')?.content || '');
                 const prodName = document.querySelector('.js-product-name,[data-store^="product-name"],h1.product__title,.product-single__title,h1')?.innerText || document.title;
 
+                // Trava anti-logo: não gerar fora de uma página de produto real.
+                // Na listagem o nome vem "Produtos" e o og:image é o LOGO da loja —
+                // isso mandava o logo como "produto" pro gerador (óculos errado no grupo).
+                const _pnGuard = (prodName || '').trim().toLowerCase();
+                if (!prodImg || _pnGuard === 'produtos' || _pnGuard === 'produto') {
+                    showError();
+                    return;
+                }
+
                 uploadStep.style.display = 'none';
                 document.getElementById('q-loading-box').style.display = 'flex';
 
