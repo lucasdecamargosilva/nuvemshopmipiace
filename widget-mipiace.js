@@ -1099,18 +1099,9 @@
             openModal();
         });
 
-        // Posiciona acima do botão de compra
-        const buyBtn = document.querySelector('.js-addtocart, .btn-add-to-cart, [data-component="product.add-to-cart"]');
-        if (buyBtn) {
-            buyBtn.parentNode.insertBefore(inlineBtn, buyBtn);
-            // Casa o formato dos cantos com o botão de comprar nativo (mesma borda, quadrada)
-            try { var _brad = getComputedStyle(buyBtn).borderRadius; if (_brad) inlineBtn.style.borderRadius = _brad; } catch (e) {}
-        } else {
-            const variantsContainer = document.querySelector('.js-product-variants');
-            if (variantsContainer) {
-                variantsContainer.parentNode.insertBefore(inlineBtn, variantsContainer.nextSibling);
-            }
-        }
+        // Botão inline acima do "Comprar" REMOVIDO a pedido da loja.
+        // O provador é acessado pelo botão flutuante sobre a imagem do produto.
+        // (inlineBtn fica criado mas não é inserido no DOM — não aparece.)
         const genBtn      = document.getElementById('q-btn-generate');
         const nextBtn     = null; // single-step flow — no next button
         const phoneStep   = null;
