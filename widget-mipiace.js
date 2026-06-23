@@ -978,6 +978,11 @@
 
 
     function init() {
+        // Não exibir na página de LISTAGEM (/produtos ou /produtos/) — só em páginas
+        // de produto (/produtos/<slug>). Na listagem o produto não existe e o widget
+        // acabava pegando o logo da loja.
+        if (/^\/produtos\/?$/i.test(location.pathname)) return;
+
         // --- FILTRO DE CATEGORIA (HAT) ---
         const productNameNormalized = (document.querySelector('.js-product-name,[data-store^="product-name"],h1.product__title,.product-single__title,h1')?.innerText || document.title).toUpperCase();
         if (productNameNormalized.includes('HAT')) {
