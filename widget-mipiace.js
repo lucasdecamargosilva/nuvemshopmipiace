@@ -1,10 +1,4 @@
 (function () {
-    // ⛔ KILL-SWITCH: provador DESATIVADO a pedido da loja — página volta ao original.
-    // O widget é carregado pelo GTM mas sai aqui sem renderizar nada.
-    // Pra religar: trocar PL_DESATIVADO para false (ou reverter este commit) e dar push.
-    var PL_DESATIVADO = true;
-    if (PL_DESATIVADO) return;
-
     function toJpeg(file){return new Promise(function(res){try{var img=new Image();var u=URL.createObjectURL(file);img.onload=function(){URL.revokeObjectURL(u);var w=img.naturalWidth||img.width,h=img.naturalHeight||img.height;if(!w||!h){res(file);return;}var sc=Math.min(1,1280/Math.max(w,h));var cw=Math.round(w*sc),ch=Math.round(h*sc);var c=document.createElement('canvas');c.width=cw;c.height=ch;c.getContext('2d').drawImage(img,0,0,cw,ch);c.toBlob(function(b){res(b||file);},'image/jpeg',0.92);};img.onerror=function(){URL.revokeObjectURL(u);res(file);};img.src=u;}catch(e){res(file);}});}
 
     function isValidBRPhone(nums) {
@@ -1105,9 +1099,18 @@
             openModal();
         });
 
-        // Botão inline acima do "Comprar" REMOVIDO a pedido da loja.
-        // O provador é acessado pelo botão flutuante sobre a imagem do produto.
-        // (inlineBtn fica criado mas não é inserido no DOM — não aparece.)
+        // Posiciona acima do botão de compra
+        const buyBtn = document.querySelector('.js-addtocart, .btn-add-to-cart, [data-component="product.add-to-cart"]');
+        if (buyBtn) {
+            buyBtn.parentNode.insertBefore(inlineBtn, buyBtn);
+            // Casa o formato dos cantos com o botão de comprar nativo (mesma borda, quadrada)
+            try { var _brad = getComputedStyle(buyBtn).borderRadius; if (_brad) inlineBtn.style.borderRadius = _brad; } catch (e) {}
+        } else {
+            const variantsContainer = document.querySelector('.js-product-variants');
+            if (variantsContainer) {
+                variantsContainer.parentNode.insertBefore(inlineBtn, variantsContainer.nextSibling);
+            }
+        }
         const genBtn      = document.getElementById('q-btn-generate');
         const nextBtn     = null; // single-step flow — no next button
         const phoneStep   = null;
