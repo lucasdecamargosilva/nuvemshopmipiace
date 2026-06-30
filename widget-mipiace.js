@@ -1187,6 +1187,12 @@
                 const og = document.querySelector('meta[property="og:image"]')?.content;
                 if (og) uniqueImgs.push(upgradeImgUrl(og));
             }
+            // TESTE (produto específico): última foto do carrossel vira a referência principal
+            try {
+                if (location.pathname.indexOf('oculos-de-sol-gatinho-metal-lente-marrom-01582-ojuk3') !== -1 && uniqueImgs.length > 1) {
+                    uniqueImgs = [uniqueImgs[uniqueImgs.length - 1]].concat(uniqueImgs.slice(0, -1));
+                }
+            } catch (e) {}
             return uniqueImgs.slice(0, 8);
         }
 
