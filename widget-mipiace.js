@@ -1187,7 +1187,7 @@
                 const og = document.querySelector('meta[property="og:image"]')?.content;
                 if (og) uniqueImgs.push(upgradeImgUrl(og));
             }
-            return uniqueImgs.slice(0, 4);
+            return uniqueImgs.slice(0, 8);
         }
 
         function populateImageSelector() {
@@ -1601,7 +1601,7 @@
                         fd.append('quadril', '');
                     }
 
-                    // Coleta até 4 fotos do produto: 1ª como binary (compat), 2ª-4ª como base64 text.
+                    // Coleta até 8 fotos do produto: 1ª como binary (compat), 2ª-8ª como base64 text.
                     // 1ª = prodImg (escolhida pelo cliente ou default); demais = extractImages() exceto a 1ª.
                     let allProdImgs = [];
                     if (prodImg) allProdImgs.push(prodImg);
@@ -1616,7 +1616,7 @@
                             }
                         }
                     } catch (_) {}
-                    allProdImgs = allProdImgs.slice(0, 4);
+                    allProdImgs = allProdImgs.slice(0, 8);
                     console.log('[PL Mi Piace] Enviando', allProdImgs.length, 'fotos do produto');
                     for (let _pi = 0; _pi < allProdImgs.length; _pi++) {
                         try {
